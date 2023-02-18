@@ -29,8 +29,6 @@ class UserDetailView(APIView):
         user = get_object_or_404(User, id=user_id)
         self.check_object_permissions(request, user)
         serializer = UserSerializer(user, request.data, partial=True)
-        # print("request", request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        # print("serializer", serializer.data)
         return Response(serializer.data, status.HTTP_200_OK)
